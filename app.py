@@ -11,7 +11,17 @@ def receive_callback():
     callback = request.data
     callback_json = json.loads(callback)
     callback_parsed = dict(callback_json)
-    print(callback_parsed)
+    print('callback is: ', type(callback_parsed))
+    print('received new action: ', callback_parsed['action'])
+    f = open('data.json', 'a')
+    f.write(json.stringify(callback_json))
+    f.close
+    print('new payload recorded')
+
+    data = {"status": "logged", "code": 200}
+    resp = jsonify(data)
+    resp.status_code = 200
+    return resp
 
 if __name__ == '__main__':
     app.run(port=5000, host='0.0.0.0')
