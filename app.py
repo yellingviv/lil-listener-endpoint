@@ -10,11 +10,11 @@ def receive_callback():
 
     callback = request.data
     callback_json = json.loads(callback)
-    callback_parsed = dict(callback_json)
-    print('callback is: ', type(callback_parsed))
-    print('received new action: ', callback_parsed['action'])
+    print(type(callback_json))
+    print('received new action: ', callback_json['action'])
+    callback_str = json.dumps(callback_json)
     f = open('data.json', 'a')
-    f.write(json.stringify(callback_json))
+    f.write(callback_str)
     f.close
     print('new payload recorded')
 
